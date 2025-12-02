@@ -21,7 +21,7 @@ function SearchBar({ onSearch }) {
     >
       <input
         type="text"
-        placeholder="Search Pokémon (e.g. pikachu)"
+        placeholder="Search Pokémon"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         style={{

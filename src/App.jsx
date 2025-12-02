@@ -2,6 +2,8 @@ import { useState } from "react";
 import usePokemon from "./hooks/usepokemon";
 import SearchBar from "./components/Searchbar";
 import PokemonCard from "./components/PokemonCard";
+import TypeChart from "./components/TypeChart";
+
 function App() {
   const { pokemon, loading, error, fetchPokemon } = usePokemon();
 
@@ -11,11 +13,12 @@ function App() {
       <SearchBar onSearch={fetchPokemon} />
 
       <p style={styles.note}>
-        Type a Pokémon name and hit "Search" to see its stats!
+        Type a Pokémon name or Dex number and hit "Search" to see its stats!
       </p>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {pokemon && <PokemonCard pokemon={pokemon} />}
+      <TypeChart />
     </div>
   );
 }

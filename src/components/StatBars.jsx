@@ -1,6 +1,6 @@
 import React from "react";
 
-const MAX_STAT = 200; // Maximum possible base stat is 255, but we use 200 for better visualization
+const MAX_STAT = 180; // Maximum possible base stat is 255, but I use 180 for better visualization
 
 const STAT_COLORS = {
   hp: "#22c55e",
