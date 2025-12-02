@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import usePokemon from "./hooks/usepokemon";
+import SearchBar from "./components/Searchbar";
+import PokemonCard from "./components/PokemonCard";
+import TypeMatrix from "./components/TypeMatrix";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { pokemon, loading, error, fetchPokemon } = usePokemon();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div style={styles.container}>
+      <h1 style={styles.title}>Pokémon Stats Analyzer</h1>
+      <SearchBar onSearch={fetchPokemon} />
+
+      <p style={styles.note}>
+        Type a Pokémon name or Dex number and hit "Search" to see its stats!
       </p>
-    </>
-  )
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {pokemon && <PokemonCard pokemon={pokemon} />}
+      <TypeMatrix />
+    </div>
+  );
 }
 
-export default App
+const styles = {
+  container: {
+    maxWidth: "600px",
+    margin: "40px auto",
+    textAlign: "center",
+    fontFamily: "sans-serif",
+  },
+  title: {
+    fontSize: "2rem",
+    marginBottom: "20px",
+  },
+  input: {
+    padding: "10px",
+    width: "80%",
+    fontSize: "1.1rem",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+  },
+  button: {
+    padding: "10px 16px",
+    fontSize: "1rem",
+    borderRadius: "8px",
+    border: "none",
+    cursor: "pointer",
+  },
+  note: {
+    marginTop: "20px",
+    color: "#888",
+  },
+  result: {
+    marginTop: "30px",
+  },
+};
+
+export default App;
