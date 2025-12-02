@@ -5,7 +5,6 @@ import typeColors from "../utils/typeColors";
 
 const ALL_TYPES = Object.keys(typeChart);
 
-// Damage multiplier for a single defender type vs one attacking type
 function getMultiplier(attackType, defendType) {
   const info = typeChart[defendType];
   if (!info) return 1;
@@ -19,9 +18,19 @@ function getMultiplier(attackType, defendType) {
 function TypeMatrix() {
   return (
     <div style={{ marginTop: "20px", overflowX: "auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "16px" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "4px" }}>
         Type Matchup Chart
       </h2>
+      <p
+        style={{
+          textAlign: "center",
+          marginBottom: "12px",
+          fontSize: "0.85rem",
+          color: "#6b7280",
+        }}
+      >
+        Rows = <strong>Attacker</strong> • Columns = <strong>Defender</strong>
+      </p>
 
       <table
         style={{
@@ -29,28 +38,32 @@ function TypeMatrix() {
           margin: "0 auto",
           minWidth: "640px",
           fontSize: "0.65rem",
-          tableLayout: "fixed",
-          width: "100%",
         }}
       >
         <thead>
           <tr>
-            {/* Empty corner cell */}
             <th
               style={{
                 padding: "4px",
                 position: "sticky",
                 left: 0,
+                top: 0,
                 background: "#f9fafb",
                 zIndex: 3,
+                textAlign: "center",
+                fontWeight: 600,
+                fontSize: "0.7rem",
+                whiteSpace: "nowrap",
               }}
-            ></th>
+            >
+              Atk ⟂ Def
+            </th>
 
-            {ALL_TYPES.map((type) => {
-              const bg = typeColors[type] || "#e5e7eb";
+            {ALL_TYPES.map((defType) => {
+              const bg = typeColors[defType] || "#e5e7eb";
               return (
                 <th
-                  key={type}
+                  key={defType}
                   style={{
                     padding: "2px 6px",
                     textAlign: "center",
@@ -69,9 +82,10 @@ function TypeMatrix() {
                       color: "#fff",
                       textTransform: "uppercase",
                       textShadow: "0 1px 2px rgba(0,0,0,0.3)",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    {type}
+                    {defType}
                   </span>
                 </th>
               );
@@ -80,12 +94,11 @@ function TypeMatrix() {
         </thead>
 
         <tbody>
-          {ALL_TYPES.map((defType) => {
-            const defBg = typeColors[defType] || "#e5e7eb";
+          {ALL_TYPES.map((atkType) => {
+            const atkBg = typeColors[atkType] || "#e5e7eb";
 
             return (
-              <tr key={defType}>
-                {/* Defender type label on left */}
+              <tr key={atkType}>
                 <th
                   style={{
                     padding: "2px 6px",
@@ -101,17 +114,18 @@ function TypeMatrix() {
                       display: "inline-block",
                       padding: "2px 6px",
                       borderRadius: "999px",
-                      backgroundColor: defBg,
+                      backgroundColor: atkBg,
                       color: "#fff",
                       textTransform: "uppercase",
                       textShadow: "0 1px 2px rgba(0,0,0,0.3)",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    {defType}
+                    {atkType}
                   </span>
                 </th>
 
-                {ALL_TYPES.map((atkType) => {
+                {ALL_TYPES.map((defType) => {
                   const mult = getMultiplier(atkType, defType);
 
                   let bg = "#ffffff";
@@ -119,35 +133,33 @@ function TypeMatrix() {
                   let label = "";
 
                   if (mult === 2) {
-                    bg = "#bbf7d0"; // green-ish
+                    bg = "#bbf7d0";
                     color = "#166534";
                     label = "2";
                   } else if (mult === 0.5) {
-                    bg = "#fecaca"; // red-ish
+                    bg = "#fecaca";
                     color = "#7f1d1d";
                     label = "½";
                   } else if (mult === 0) {
-                    bg = "#111827"; // near black
+                    bg = "#111827";
                     color = "#f9fafb";
                     label = "0";
-                  } else {
-                    // 1x, leave blank
-                    label = "";
                   }
 
                   return (
                     <td
-                      key={atkType}
+                      key={defType}
                       style={{
-                        width: "18px",
-                        height: "18px",
+                        width: "12px",
+                        height: "12px",
                         textAlign: "center",
                         border: "1px solid #e5e7eb",
                         backgroundColor: bg,
                         color,
                         fontWeight: label ? 600 : 400,
-                        padding: "0",
-                        lineHeight: "18px",
+                        padding: 0,
+                        lineHeight: "12px", // match height
+                        fontSize: "0.55rem", // small but readable
                       }}
                     >
                       {label}
