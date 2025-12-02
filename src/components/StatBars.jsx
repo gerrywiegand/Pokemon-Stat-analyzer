@@ -1,5 +1,14 @@
 import React from "react";
 
+const STAT_NAMES = {
+  hp: "HP",
+  attack: "Atk",
+  defense: "Def",
+  "special-attack": "Sp. Atk",
+  "special-defense": "Sp. Def",
+  speed: "Spe",
+};
+
 const MAX_STAT = 180; // Maximum possible base stat is 255, but I use 180 for better visualization
 
 const STAT_COLORS = {
@@ -20,6 +29,7 @@ function StatBars({ stats }) {
       {stats.map((stat) => {
         const percent = Math.min((stat.value / MAX_STAT) * 100, 100);
         const color = STAT_COLORS[stat.name] || STAT_COLORS.default;
+        const label = STAT_NAMES[stat.name] || stat.name.toUpperCase();
 
         return (
           <div
@@ -32,7 +42,7 @@ function StatBars({ stats }) {
               fontFamily: "monospace",
             }}
           >
-            <span style={{ width: "110px" }}>{stat.name.toUpperCase()}</span>
+            <span style={{ width: "110px" }}>{label}</span>
 
             {/* Outer bar */}
             <div
@@ -42,6 +52,7 @@ function StatBars({ stats }) {
                 borderRadius: "999px",
                 backgroundColor: "#eee",
                 overflow: "hidden",
+                boxShadow: "inset 0 0 2px rgba(0,0,0,0.15)",
               }}
             >
               {/* Inner bar */}

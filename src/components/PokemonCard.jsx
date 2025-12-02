@@ -2,6 +2,7 @@ import React from "react";
 import StatBars from "./StatBars";
 import typeColors from "../utils/typeColors";
 import { getWeaknessesForTypes } from "../utils/typeMatchups";
+import { classifyRole } from "../utils/roleClassifier";
 
 function PokemonCard({ pokemon }) {
   if (!pokemon) return null;
@@ -12,8 +13,8 @@ function PokemonCard({ pokemon }) {
   return (
     <div
       style={{
-        marginTop: "30px",
-        padding: "20px",
+        marginTop: "24px",
+        padding: "20px 20px 24px",
         borderRadius: "16px",
         border: "1px solid #e5e7eb",
         boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
@@ -24,7 +25,7 @@ function PokemonCard({ pokemon }) {
       }}
     >
       {/* Header: sprite + name + types */}
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
         {sprite && (
           <img
             src={sprite}
@@ -50,6 +51,11 @@ function PokemonCard({ pokemon }) {
                 #{id.toString().padStart(3, "0")}
               </span>
             )}
+            <div
+              style={{ fontSize: "0.9rem", color: "#444", marginTop: "4px" }}
+            >
+              Role: {classifyRole(stats)}
+            </div>
           </h2>
           <div style={{ marginTop: "8px" }}>
             {types.map((type) => {
