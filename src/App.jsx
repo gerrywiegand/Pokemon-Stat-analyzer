@@ -2,7 +2,7 @@ import { useState } from "react";
 import usePokemon from "./hooks/usepokemon";
 import SearchBar from "./components/Searchbar";
 import PokemonCard from "./components/PokemonCard";
-import TypeChart from "./components/TypeChart";
+import TypeMatrix from "./components/TypeMatrix";
 
 function App() {
   const { pokemon, loading, error, fetchPokemon } = usePokemon();
@@ -18,7 +18,7 @@ function App() {
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {pokemon && <PokemonCard pokemon={pokemon} />}
-      <TypeChart />
+      <TypeMatrix />
     </div>
   );
 }
