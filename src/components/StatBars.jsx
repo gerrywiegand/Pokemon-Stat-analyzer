@@ -1,13 +1,13 @@
 import React from "react";
 
-const MAX_STAT = 255; // Maximum possible base stat in Pokémon games
+const MAX_STAT = 200; // Maximum possible base stat is 255, but we use 200 for better visualization
 
 const STAT_COLORS = {
   hp: "#22c55e",
   attack: "#ef4444",
   defense: "#f59e0b",
-  specialattack: "#3b82f6",
-  specialdefense: "#6366f1",
+  "special-attack": "#3b82f6",
+  "special-defense": "#6366f1",
   speed: "#f1e90dff",
   default: "#76a5af",
 };

@@ -1,22 +1,24 @@
 import React from "react";
 import StatBars from "./StatBars";
+import typeColors from "../assets/typeColors";
 
 function PokemonCard({ pokemon }) {
   if (!pokemon) return null;
 
-  const { name, sprite, types, stats } = pokemon;
+  const { id, name, sprite, artwork, types, abilities, stats } = pokemon;
 
   return (
     <div
       style={{
         marginTop: "30px",
         padding: "20px",
-        borderRadius: "12px",
-        border: "1px solid #ddd",
-        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.08)",
-        maxWidth: "500px",
+        borderRadius: "16px",
+        border: "1px solid #e5e7eb",
+        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
+        maxWidth: "640px",
         marginLeft: "auto",
         marginRight: "auto",
+        background: "linear-gradient(135deg, #f9fafb, #eef2ff)",
       }}
     >
       {/* Header: sprite + name + types */}
@@ -33,27 +35,91 @@ function PokemonCard({ pokemon }) {
           />
         )}
         <div style={{ textAlign: "left" }}>
-          <h2 style={{ margin: 0 }}>{name.toUpperCase()}</h2>
-          <div style={{ marginTop: "8px" }}>
-            {types.map((type) => (
+          <h2 style={{ margin: 0 }}>
+            {name.toUpperCase()}{" "}
+            {typeof id === "number" && (
               <span
-                key={type}
                 style={{
-                  display: "inline-block",
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  backgroundColor: "#eee",
                   fontSize: "0.9rem",
-                  textTransform: "uppercase",
-                  marginRight: "6px",
+                  fontWeight: "normal",
+                  color: "#666",
                 }}
               >
-                {type}
+                #{id.toString().padStart(3, "0")}
               </span>
-            ))}
+            )}
+          </h2>
+          <div style={{ marginTop: "8px" }}>
+            {types.map((type) => {
+              const bg = typeColors[type] || "#eee";
+
+              return (
+                <span
+                  key={type}
+                  style={{
+                    display: "inline-block",
+                    padding: "4px 10px",
+                    borderRadius: "999px",
+                    backgroundColor: bg,
+                    color: "#fff",
+                    fontSize: "0.9rem",
+                    textTransform: "uppercase",
+                    marginRight: "6px",
+                    textShadow: "0 1px 2px rgba(0, 0, 0, 0.3)",
+                  }}
+                >
+                  {type}
+                </span>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {/* Optional big artwork */}
+      {artwork && (
+        <div style={{ marginTop: "16px", textAlign: "center" }}>
+          <img
+            src={artwork}
+            alt={`${name} artwork`}
+            style={{ maxWidth: "260px", width: "100%" }}
+          />
+        </div>
+      )}
+
+      {abilities && abilities.length > 0 && (
+        <div style={{ marginTop: "16px", textAlign: "left" }}>
+          <h3 style={{ marginBottom: "6px" }}>Abilities</h3>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {abilities.map((ability) => (
+              <li key={ability.name} style={{ marginBottom: "8px" }}>
+                <div>
+                  <strong>
+                    {ability.name.replace("-", " ")}
+                    {ability.isHidden && (
+                      <span style={{ fontSize: "0.8rem", color: "#888" }}>
+                        {" "}
+                        (Hidden)
+                      </span>
+                    )}
+                  </strong>
+                </div>
+                {ability.description && (
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "#555",
+                      marginTop: "2px",
+                    }}
+                  >
+                    {ability.description}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Stats */}
       <div style={{ marginTop: "20px", textAlign: "left" }}>
