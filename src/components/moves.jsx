@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import typeColors from "../utils/typeColors";
 
 const categoryColors = {
@@ -9,191 +9,264 @@ const categoryColors = {
 };
 
 function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
+  const [openCategory, setOpenCategory] = useState(null);
+
+  const toggleCategory = (category) => {
+    setOpenCategory((prev) => (prev === category ? null : category));
+  };
+
+  const handlePhysicalClick = () => {
+    toggleCategory("physical");
+  };
+
+  const handleSpecialClick = () => {
+    toggleCategory("special");
+  };
+
+  const handleStatusClick = () => {
+    toggleCategory("status");
+  };
+
   return (
     <>
       {/* Moves */}
       {physicalMoves && physicalMoves.length > 0 && (
         <div style={{ marginTop: "20px", textAlign: "left" }}>
-          <h3 style={{ marginBottom: "8px" }}>Physical Moves</h3>
-          <div>
-            {physicalMoves.map((move) => {
-              const typeBg = typeColors[move.type] || "#e5e7eb";
-              const catBg = categoryColors[move.category] || "#aaa";
-              return (
-                <div
-                  key={move.name}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    marginBottom: "6px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <strong
-                    style={{ textTransform: "capitalize", minWidth: "140px" }}
-                  >
-                    {move.name.replace("-", " ")}
-                  </strong>
-                  <span
+          <h3
+            onClick={() => toggleCategory("physical")}
+            style={{
+              cursor: "pointer",
+              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              fontSize: "1.1rem",
+              marginBottom: "8px",
+              color: "#1d4ed8",
+              textDecoration: "underline",
+            }}
+          >
+            <span>{openCategory === "physical" ? "▼" : "▶"}</span>
+            Physical Moves
+          </h3>
+          {openCategory === "physical" && (
+            <div>
+              {physicalMoves.map((move) => {
+                const typeBg = typeColors[move.type] || "#e5e7eb";
+                const catBg = categoryColors[move.category] || "#aaa";
+                return (
+                  <div
+                    key={move.name}
                     style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: typeBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginBottom: "6px",
+                      fontSize: "0.9rem",
                     }}
                   >
-                    {move.type}
-                  </span>
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: catBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {move.category}
-                  </span>
-                  {move.power != null && (
-                    <span style={{ marginLeft: "auto" }}>
-                      Power {move.power}
+                    <strong
+                      style={{ textTransform: "capitalize", minWidth: "140px" }}
+                    >
+                      {move.name.replace("-", " ")}
+                    </strong>
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: typeBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {move.type}
                     </span>
-                  )}
-                  {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
-                </div>
-              );
-            })}
-          </div>
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: catBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {move.category}
+                    </span>
+                    {move.power != null && (
+                      <span style={{ marginLeft: "auto" }}>
+                        Power {move.power}
+                      </span>
+                    )}
+                    {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
       {specialMoves && specialMoves.length > 0 && (
-        <div style={{ marginTop: "20px", textAlign: "left" }}>
-          <h3 style={{ marginBottom: "8px" }}>Special Moves</h3>
-          <div>
-            {specialMoves.map((move) => {
-              const typeBg = typeColors[move.type] || "#e5e7eb";
-              const catBg = categoryColors[move.category] || "#aaa";
-              return (
-                <div
-                  key={move.name}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    marginBottom: "6px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <strong
-                    style={{ textTransform: "capitalize", minWidth: "140px" }}
-                  >
-                    {move.name.replace("-", " ")}
-                  </strong>
-                  <span
+        <div
+          style={{
+            marginBottom: "8px",
+          }}
+        >
+          <h3
+            onClick={() => toggleCategory("special")}
+            style={{
+              cursor: "pointer",
+              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              fontSize: "1.1rem",
+              marginBottom: "8px",
+              color: "#1d4ed8",
+              textDecoration: "underline",
+            }}
+          >
+            <span>{openCategory === "special" ? "▼" : "▶"}</span>
+            Special Moves
+          </h3>
+          {openCategory === "special" && (
+            <div>
+              {specialMoves.map((move) => {
+                const typeBg = typeColors[move.type] || "#e5e7eb";
+                const catBg = categoryColors[move.category] || "#aaa";
+                return (
+                  <div
+                    key={move.name}
                     style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: typeBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginBottom: "6px",
+                      fontSize: "0.9rem",
                     }}
                   >
-                    {move.type}
-                  </span>
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: catBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {move.category}
-                  </span>
-                  {move.power != null && (
-                    <span style={{ marginLeft: "auto" }}>
-                      Power {move.power}
+                    <strong
+                      style={{ textTransform: "capitalize", minWidth: "140px" }}
+                    >
+                      {move.name.replace("-", " ")}
+                    </strong>
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: typeBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {move.type}
                     </span>
-                  )}
-                  {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
-                </div>
-              );
-            })}
-          </div>
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: catBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {move.category}
+                    </span>
+                    {move.power != null && (
+                      <span style={{ marginLeft: "auto" }}>
+                        Power {move.power}
+                      </span>
+                    )}
+                    {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
       {statusMoves && statusMoves.length > 0 && (
         <div style={{ marginTop: "20px", textAlign: "left" }}>
-          <h3 style={{ marginBottom: "8px" }}>Status Moves</h3>
-          <div>
-            {statusMoves.map((move) => {
-              const typeBg = typeColors[move.type] || "#e5e7eb";
-              const catBg = categoryColors[move.category] || "#aaa";
-              return (
-                <div
-                  key={move.name}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    marginBottom: "6px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  {/* Move Name */}
-                  <strong
-                    style={{ textTransform: "capitalize", minWidth: "140px" }}
-                  >
-                    {move.name.replace("-", " ")}
-                  </strong>
-
-                  {/* TYPE PILL */}
-                  <span
+          <h3
+            onClick={() => toggleCategory("status")}
+            style={{
+              cursor: "pointer",
+              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              fontSize: "1.1rem",
+              marginBottom: "8px",
+              color: "#1d4ed8",
+              textDecoration: "underline",
+            }}
+          >
+            <span>{openCategory === "status" ? "▼" : "▶"}</span>
+            Status Moves
+          </h3>
+          {openCategory === "status" && (
+            <div>
+              {statusMoves.map((move) => {
+                const typeBg = typeColors[move.type] || "#e5e7eb";
+                const catBg = categoryColors[move.category] || "#aaa";
+                return (
+                  <div
+                    key={move.name}
                     style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: typeBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginBottom: "6px",
+                      fontSize: "0.9rem",
                     }}
                   >
-                    {move.type}
-                  </span>
+                    {/* Move Name */}
+                    <strong
+                      style={{ textTransform: "capitalize", minWidth: "140px" }}
+                    >
+                      {move.name.replace("-", " ")}
+                    </strong>
 
-                  {/* CATEGORY PILL */}
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      borderRadius: "999px",
-                      backgroundColor: catBg,
-                      color: "white",
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {move.category}
-                  </span>
-
-                  {/* POWER & ACCURACY */}
-                  {move.power != null && (
-                    <span style={{ marginLeft: "auto" }}>
-                      Power {move.power}
+                    {/* TYPE PILL */}
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: typeBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {move.type}
                     </span>
-                  )}
-                  {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
-                </div>
-              );
-            })}
-          </div>
+
+                    {/* CATEGORY PILL */}
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        backgroundColor: catBg,
+                        color: "white",
+                        fontSize: "0.75rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {move.category}
+                    </span>
+
+                    {/* POWER & ACCURACY */}
+                    {move.power != null && (
+                      <span style={{ marginLeft: "auto" }}>
+                        Power {move.power}
+                      </span>
+                    )}
+                    {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </>

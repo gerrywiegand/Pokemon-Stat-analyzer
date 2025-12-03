@@ -6,6 +6,12 @@ function usePokemon() {
   const [error, setError] = useState(null);
 
   const fetchPokemon = async (name) => {
+    name = name.trim();
+    if (!name) {
+      setError("Please enter a Pokémon name or Dex number.");
+      setPokemon(null);
+      return;
+    }
     try {
       setError(null);
       setLoading(true);
