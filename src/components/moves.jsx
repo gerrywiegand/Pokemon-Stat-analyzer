@@ -38,11 +38,14 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
               cursor: "pointer",
               userSelect: "none",
               display: "flex",
+              gap: "8px",
               alignItems: "center",
               fontSize: "1.1rem",
+              marginTop: "12px",
               marginBottom: "8px",
-              color: "#1d4ed8",
-              textDecoration: "underline",
+              color: "#111827",
+              fontWeight: "600",
+              textDecoration: "none",
             }}
           >
             <span>{openCategory === "physical" ? "▼" : "▶"}</span>
@@ -118,11 +121,14 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
               cursor: "pointer",
               userSelect: "none",
               display: "flex",
+              gap: "8px",
               alignItems: "center",
               fontSize: "1.1rem",
+              marginTop: "12px",
               marginBottom: "8px",
-              color: "#1d4ed8",
-              textDecoration: "underline",
+              color: "#111827",
+              fontWeight: "600",
+              textDecoration: "none",
             }}
           >
             <span>{openCategory === "special" ? "▼" : "▶"}</span>
@@ -194,11 +200,14 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
               cursor: "pointer",
               userSelect: "none",
               display: "flex",
+              gap: "8px",
               alignItems: "center",
               fontSize: "1.1rem",
+              marginTop: "12px",
               marginBottom: "8px",
-              color: "#1d4ed8",
-              textDecoration: "underline",
+              color: "#111827",
+              fontWeight: "600",
+              textDecoration: "none",
             }}
           >
             <span>{openCategory === "status" ? "▼" : "▶"}</span>
