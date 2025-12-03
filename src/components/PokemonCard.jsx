@@ -3,6 +3,7 @@ import StatBars from "./StatBars";
 import typeColors from "../utils/typeColors";
 import { getWeaknessesForTypes } from "../utils/typeMatchups";
 import { classifyRole } from "../utils/roleClassifier";
+import PokemonMoves from "./moves";
 
 const categoryColors = {
   physical: "#e3342f",
@@ -14,11 +15,7 @@ const categoryColors = {
 function PokemonCard({ pokemon }) {
   if (!pokemon) return null;
   const { id, name, sprite, artwork, types, abilities, stats, moves } = pokemon;
-  const {
-    physicalMoves = [],
-    specialMoves = [],
-    statusMoves = [],
-  } = moves || {};
+  const { physicalMoves, specialMoves, statusMoves } = moves || {};
 
   const weaknesses = getWeaknessesForTypes(types);
 
@@ -188,241 +185,12 @@ function PokemonCard({ pokemon }) {
           </div>
         </div>
       )}
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "20px",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-        }}
-      >
-        {/* MOVES SECTION */}
-        {(physicalMoves.length || specialMoves.length || statusMoves.length) >
-          0 && (
-          <div style={{ marginTop: "20px", textAlign: "left" }}>
-            <h3 style={{ marginBottom: "8px" }}>Moves</h3>
 
-            <div
-              style={{
-                display: "flex",
-                gap: "20px",
-                alignItems: "flex-start",
-                justifyContent: "space-between",
-              }}
-            >
-              {/* Physical Moves */}
-              {physicalMoves.length > 0 && (
-                <div
-                  style={{
-                    flex: 1,
-                    minWidth: "260px",
-                    maxHeight: "260px",
-                    overflowY: "auto",
-                  }}
-                >
-                  <h4 style={{ marginBottom: "8px" }}>Physical Moves</h4>
-                  {physicalMoves.map((move) => {
-                    const typeBg = typeColors[move.type] || "#e5e7eb";
-                    const catBg = categoryColors[move.category] || "#aaa";
-                    return (
-                      <div
-                        key={move.name}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          marginBottom: "4px",
-                          fontSize: "0.85rem",
-                        }}
-                      >
-                        <strong
-                          style={{
-                            textTransform: "capitalize",
-                            minWidth: "120px",
-                          }}
-                        >
-                          {move.name.replace("-", " ")}
-                        </strong>
-
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: typeBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          {move.type}
-                        </span>
-
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: catBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {move.category}
-                        </span>
-
-                        {move.power != null && (
-                          <span style={{ marginLeft: "auto" }}>
-                            Pwr {move.power}
-                          </span>
-                        )}
-                        {move.accuracy != null && (
-                          <span>Acc {move.accuracy}%</span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Special Moves */}
-              {specialMoves.length > 0 && (
-                <div
-                  style={{
-                    flex: 1,
-                    minWidth: "260px",
-                    maxHeight: "260px",
-                    overflowY: "auto",
-                  }}
-                >
-                  <h4 style={{ marginBottom: "8px" }}>Special Moves</h4>
-                  {specialMoves.map((move) => {
-                    const typeBg = typeColors[move.type] || "#e5e7eb";
-                    const catBg = categoryColors[move.category] || "#aaa";
-                    return (
-                      <div
-                        key={move.name}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          marginBottom: "4px",
-                          fontSize: "0.85rem",
-                        }}
-                      >
-                        <strong
-                          style={{
-                            textTransform: "capitalize",
-                            minWidth: "120px",
-                          }}
-                        >
-                          {move.name.replace("-", " ")}
-                        </strong>
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: typeBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          {move.type}
-                        </span>
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: catBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {move.category}
-                        </span>
-                        {move.power != null && (
-                          <span style={{ marginLeft: "auto" }}>
-                            Pwr {move.power}
-                          </span>
-                        )}
-                        {move.accuracy != null && (
-                          <span>Acc {move.accuracy}%</span>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Status Moves */}
-              {statusMoves.length > 0 && (
-                <div
-                  style={{
-                    flex: 1,
-                    minWidth: "260px",
-                    maxHeight: "260px",
-                    overflowY: "auto",
-                  }}
-                >
-                  <h4 style={{ marginBottom: "8px" }}>Status Moves</h4>
-                  {statusMoves.map((move) => {
-                    const typeBg = typeColors[move.type] || "#e5e7eb";
-                    const catBg = categoryColors[move.category] || "#aaa";
-                    return (
-                      <div
-                        key={move.name}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          marginBottom: "4px",
-                          fontSize: "0.85rem",
-                        }}
-                      >
-                        <strong
-                          style={{
-                            textTransform: "capitalize",
-                            minWidth: "120px",
-                          }}
-                        >
-                          {move.name.replace("-", " ")}
-                        </strong>
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: typeBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          {move.type}
-                        </span>
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            borderRadius: "999px",
-                            backgroundColor: catBg,
-                            color: "white",
-                            fontSize: "0.7rem",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {move.category}
-                        </span>
-                        {/* status moves usually have no power; accuracy is often null, so we can skip */}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+      <PokemonMoves
+        physicalMoves={physicalMoves}
+        specialMoves={specialMoves}
+        statusMoves={statusMoves}
+      />
     </div>
   );
 }
