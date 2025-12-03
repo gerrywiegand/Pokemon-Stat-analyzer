@@ -6,7 +6,6 @@ function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(inputValue);
 
     const trimmed = inputValue.trim();
     if (!trimmed) return;
