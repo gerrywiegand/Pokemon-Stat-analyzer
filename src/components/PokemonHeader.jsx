@@ -1,60 +1,34 @@
 import React from "react";
 import typeColors from "../utils/typeColors";
 import { classifyRole } from "../utils/roleClassifier";
+import "../styles/PokemonHeader.css";
 
 function PokemonHeader({ id, name, sprite, artwork, types, stats, abilities }) {
   return (
     <>
       {/* Header: sprite + name + types */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        {sprite && (
-          <img
-            src={sprite}
-            alt={name}
-            style={{
-              width: "96px",
-              height: "96px",
-              imageRendering: "pixelated",
-            }}
-          />
-        )}
+      <div className="pokemon-header-container">
+        {sprite && <img src={sprite} alt={name} className="pokemon-sprite" />}
         <div>
-          <h2 style={{ margin: 0 }}>
+          <h2 className="pokemon-name">
             {name.toUpperCase()}{" "}
             {typeof id === "number" && (
-              <span
-                style={{
-                  fontSize: "0.9rem",
-                  fontWeight: "normal",
-                  color: "#666",
-                }}
-              >
+              <span className="pokemon-dex-number">
                 #{id.toString().padStart(3, "0")}
               </span>
             )}
           </h2>
 
-          <div style={{ fontSize: "0.9rem", color: "#444", marginTop: "4px" }}>
-            Role: {classifyRole(stats)}
-          </div>
-          <div style={{ marginTop: "8px" }}>
+          <div className="pokemon-role">Role: {classifyRole(stats)}</div>
+          <div className="pokemon-types-container">
             {types.map((type) => {
               const bg = typeColors[type] || "#eee";
 
               return (
                 <span
                   key={type}
-                  style={{
-                    display: "inline-block",
-                    padding: "4px 10px",
-                    borderRadius: "999px",
-                    backgroundColor: bg,
-                    color: "#fff",
-                    fontSize: "0.9rem",
-                    textTransform: "uppercase",
-                    marginRight: "6px",
-                    textShadow: "0 1px 2px rgba(0, 0, 0, 0.3)",
-                  }}
+                  className="pokemon-type-badge"
+                  style={{ backgroundColor: bg }}
                 >
                   {type}
                 </span>
@@ -66,39 +40,30 @@ function PokemonHeader({ id, name, sprite, artwork, types, stats, abilities }) {
 
       {/* Optional big artwork */}
       {artwork && (
-        <div style={{ marginTop: "16px", textAlign: "center" }}>
+        <div className="pokemon-artwork-container">
           <img
             src={artwork}
             alt={`${name} artwork`}
-            style={{ maxWidth: "260px", width: "100%" }}
+            className="pokemon-artwork"
           />
         </div>
       )}
       {abilities && abilities.length > 0 && (
-        <div style={{ marginTop: "16px", textAlign: "left" }}>
-          <h3 style={{ marginBottom: "6px" }}>Abilities</h3>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        <div className="pokemon-abilities-container">
+          <h3 className="pokemon-abilities-title">Abilities</h3>
+          <ul className="pokemon-abilities-list">
             {abilities.map((ability) => (
-              <li key={ability.name} style={{ marginBottom: "8px" }}>
+              <li key={ability.name} className="pokemon-ability-item">
                 <div>
                   <strong>
                     {ability.name.replace("-", " ")}
                     {ability.isHidden && (
-                      <span style={{ fontSize: "0.8rem", color: "#888" }}>
-                        {" "}
-                        (Hidden)
-                      </span>
+                      <span className="pokemon-ability-hidden"> (Hidden)</span>
                     )}
                   </strong>
                 </div>
                 {ability.description && (
-                  <div
-                    style={{
-                      fontSize: "0.85rem",
-                      color: "#555",
-                      marginTop: "2px",
-                    }}
-                  >
+                  <div className="pokemon-ability-description">
                     {ability.description}
                   </div>
                 )}

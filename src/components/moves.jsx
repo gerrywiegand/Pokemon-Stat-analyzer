@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import typeColors from "../utils/typeColors";
+import "../styles/PokemonMoves.css";
 
 const categoryColors = {
   physical: "#e3342f",
@@ -31,22 +32,10 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
     <>
       {/* Moves */}
       {physicalMoves && physicalMoves.length > 0 && (
-        <div style={{ marginTop: "20px", textAlign: "left" }}>
+        <div className="moves-section">
           <h3
             onClick={() => toggleCategory("physical")}
-            style={{
-              cursor: "pointer",
-              userSelect: "none",
-              display: "flex",
-              gap: "8px",
-              alignItems: "center",
-              fontSize: "1.1rem",
-              marginTop: "12px",
-              marginBottom: "8px",
-              color: "#111827",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
+            className="moves-category-header"
           >
             <span>{openCategory === "physical" ? "▼" : "▶"}</span>
             Physical Moves
@@ -57,49 +46,24 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
                 const typeBg = typeColors[move.type] || "#e5e7eb";
                 const catBg = categoryColors[move.category] || "#aaa";
                 return (
-                  <div
-                    key={move.name}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      marginBottom: "6px",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <strong
-                      style={{ textTransform: "capitalize", minWidth: "140px" }}
-                    >
+                  <div key={move.name} className="move-item">
+                    <strong className="move-name">
                       {move.name.replace("-", " ")}
                     </strong>
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: typeBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "uppercase",
-                      }}
+                      className="move-type-badge"
+                      style={{ backgroundColor: typeBg }}
                     >
                       {move.type}
                     </span>
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: catBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "capitalize",
-                      }}
+                      className="move-category-badge"
+                      style={{ backgroundColor: catBg }}
                     >
                       {move.category}
                     </span>
                     {move.power != null && (
-                      <span style={{ marginLeft: "auto" }}>
-                        Power {move.power}
-                      </span>
+                      <span className="move-power">Power {move.power}</span>
                     )}
                     {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
                   </div>
@@ -110,26 +74,10 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
         </div>
       )}
       {specialMoves && specialMoves.length > 0 && (
-        <div
-          style={{
-            marginBottom: "8px",
-          }}
-        >
+        <div className="moves-category-content">
           <h3
             onClick={() => toggleCategory("special")}
-            style={{
-              cursor: "pointer",
-              userSelect: "none",
-              display: "flex",
-              gap: "8px",
-              alignItems: "center",
-              fontSize: "1.1rem",
-              marginTop: "12px",
-              marginBottom: "8px",
-              color: "#111827",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
+            className="moves-category-header"
           >
             <span>{openCategory === "special" ? "▼" : "▶"}</span>
             Special Moves
@@ -140,49 +88,24 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
                 const typeBg = typeColors[move.type] || "#e5e7eb";
                 const catBg = categoryColors[move.category] || "#aaa";
                 return (
-                  <div
-                    key={move.name}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      marginBottom: "6px",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <strong
-                      style={{ textTransform: "capitalize", minWidth: "140px" }}
-                    >
+                  <div key={move.name} className="move-item">
+                    <strong className="move-name">
                       {move.name.replace("-", " ")}
                     </strong>
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: typeBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "uppercase",
-                      }}
+                      className="move-type-badge"
+                      style={{ backgroundColor: typeBg }}
                     >
                       {move.type}
                     </span>
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: catBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "capitalize",
-                      }}
+                      className="move-category-badge"
+                      style={{ backgroundColor: catBg }}
                     >
                       {move.category}
                     </span>
                     {move.power != null && (
-                      <span style={{ marginLeft: "auto" }}>
-                        Power {move.power}
-                      </span>
+                      <span className="move-power">Power {move.power}</span>
                     )}
                     {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
                   </div>
@@ -193,22 +116,10 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
         </div>
       )}
       {statusMoves && statusMoves.length > 0 && (
-        <div style={{ marginTop: "20px", textAlign: "left" }}>
+        <div className="moves-section">
           <h3
             onClick={() => toggleCategory("status")}
-            style={{
-              cursor: "pointer",
-              userSelect: "none",
-              display: "flex",
-              gap: "8px",
-              alignItems: "center",
-              fontSize: "1.1rem",
-              marginTop: "12px",
-              marginBottom: "8px",
-              color: "#111827",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
+            className="moves-category-header"
           >
             <span>{openCategory === "status" ? "▼" : "▶"}</span>
             Status Moves
@@ -219,56 +130,31 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
                 const typeBg = typeColors[move.type] || "#e5e7eb";
                 const catBg = categoryColors[move.category] || "#aaa";
                 return (
-                  <div
-                    key={move.name}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      marginBottom: "6px",
-                      fontSize: "0.9rem",
-                    }}
-                  >
+                  <div key={move.name} className="move-item">
                     {/* Move Name */}
-                    <strong
-                      style={{ textTransform: "capitalize", minWidth: "140px" }}
-                    >
+                    <strong className="move-name">
                       {move.name.replace("-", " ")}
                     </strong>
 
                     {/* TYPE PILL */}
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: typeBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "uppercase",
-                      }}
+                      className="move-type-badge"
+                      style={{ backgroundColor: typeBg }}
                     >
                       {move.type}
                     </span>
 
                     {/* CATEGORY PILL */}
                     <span
-                      style={{
-                        padding: "2px 8px",
-                        borderRadius: "999px",
-                        backgroundColor: catBg,
-                        color: "white",
-                        fontSize: "0.75rem",
-                        textTransform: "capitalize",
-                      }}
+                      className="move-category-badge"
+                      style={{ backgroundColor: catBg }}
                     >
                       {move.category}
                     </span>
 
                     {/* POWER & ACCURACY */}
                     {move.power != null && (
-                      <span style={{ marginLeft: "auto" }}>
-                        Power {move.power}
-                      </span>
+                      <span className="move-power">Power {move.power}</span>
                     )}
                     {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
                   </div>
