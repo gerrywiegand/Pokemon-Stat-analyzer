@@ -3,11 +3,20 @@ import StatBars from "./StatBars";
 import typeColors from "../utils/typeColors";
 import { getWeaknessesForTypes } from "../utils/typeMatchups";
 import { classifyRole } from "../utils/roleClassifier";
+import PokemonMoves from "./moves";
+
+const categoryColors = {
+  physical: "#e3342f",
+  special: "#3490dc",
+  status: "#9561e2",
+  unknown: "#6b7280",
+};
 
 function PokemonCard({ pokemon }) {
   if (!pokemon) return null;
+  const { id, name, sprite, artwork, types, abilities, stats, moves } = pokemon;
+  const { physicalMoves, specialMoves, statusMoves } = moves || {};
 
-  const { id, name, sprite, artwork, types, abilities, stats } = pokemon;
   const weaknesses = getWeaknessesForTypes(types);
 
   return (
@@ -141,8 +150,10 @@ function PokemonCard({ pokemon }) {
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {weaknesses.map((w) => {
               const bg = typeColors[w.type] || "#e5e7eb";
+              const tooltip = `${name} takes ${w.multiplier}x damage from ${w.type}-type moves.`;
               return (
                 <span
+                  title={tooltip}
                   key={w.type}
                   style={{
                     display: "inline-flex",
@@ -174,6 +185,12 @@ function PokemonCard({ pokemon }) {
           </div>
         </div>
       )}
+
+      <PokemonMoves
+        physicalMoves={physicalMoves}
+        specialMoves={specialMoves}
+        statusMoves={statusMoves}
+      />
     </div>
   );
 }
