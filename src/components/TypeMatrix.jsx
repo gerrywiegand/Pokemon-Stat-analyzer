@@ -1,6 +1,7 @@
 import React from "react";
 import typeChart from "../utils/typeChart";
 import typeColors from "../utils/typeColors";
+import "../styles/TypeMatrix.css";
 
 const ALL_TYPES = Object.keys(typeChart);
 
@@ -17,75 +18,26 @@ function getMultiplier(attackType, defendType) {
 function TypeMatrix() {
   return (
     <>
-      <div style={{ marginTop: "20px", overflowX: "auto" }}>
-        <h2 style={{ textAlign: "center", marginBottom: "4px" }}>
-          Type Matchup Chart
-        </h2>
-        <p
-          style={{
-            textAlign: "center",
-            marginBottom: "12px",
-            fontSize: "0.85rem",
-            color: "#6b7280",
-          }}
-        >
+      <div className="type-matrix-wrapper">
+        <h2 className="type-matrix-title">Type Matchup Chart</h2>
+        <p className="type-matrix-subtitle">
           Rows = <strong>Attacker</strong> • Columns = <strong>Defender</strong>
         </p>
       </div>
 
-      <div style={{ marginTop: "20px", overflowX: "auto" }}>
-        <table
-          style={{
-            borderCollapse: "collapse",
-            margin: "0 auto",
-            minWidth: "640px",
-            fontSize: "0.65rem",
-          }}
-        >
+      <div className="type-matrix-table-wrapper">
+        <table className="type-matrix-table">
           <thead>
             <tr>
-              <th
-                style={{
-                  padding: "4px",
-                  position: "sticky",
-                  left: 0,
-                  top: 0,
-                  background: "#f9fafb",
-                  zIndex: 3,
-                  textAlign: "center",
-                  fontWeight: 600,
-                  fontSize: "0.7rem",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Atk ⟂ Def
-              </th>
+              <th className="type-matrix-corner-cell">Atk ⟂ Def</th>
 
               {ALL_TYPES.map((defType) => {
                 const bg = typeColors[defType] || "#e5e7eb";
                 return (
-                  <th
-                    key={defType}
-                    style={{
-                      padding: "2px 6px",
-                      textAlign: "center",
-                      position: "sticky",
-                      top: 0,
-                      background: "#f9fafb",
-                      zIndex: 2,
-                    }}
-                  >
+                  <th key={defType} className="type-matrix-header-cell">
                     <span
-                      style={{
-                        display: "inline-block",
-                        padding: "2px 6px",
-                        borderRadius: "999px",
-                        backgroundColor: bg,
-                        color: "#fff",
-                        textTransform: "uppercase",
-                        textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                        whiteSpace: "nowrap",
-                      }}
+                      className="type-matrix-type-badge"
+                      style={{ backgroundColor: bg }}
                     >
                       {defType}
                     </span>
@@ -101,27 +53,10 @@ function TypeMatrix() {
 
               return (
                 <tr key={atkType}>
-                  <th
-                    style={{
-                      padding: "2px 6px",
-                      textAlign: "right",
-                      position: "sticky",
-                      left: 0,
-                      background: "#f9fafb",
-                      zIndex: 1,
-                    }}
-                  >
+                  <th className="type-matrix-row-header">
                     <span
-                      style={{
-                        display: "inline-block",
-                        padding: "2px 6px",
-                        borderRadius: "999px",
-                        backgroundColor: atkBg,
-                        color: "#fff",
-                        textTransform: "uppercase",
-                        textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                        whiteSpace: "nowrap",
-                      }}
+                      className="type-matrix-type-badge"
+                      style={{ backgroundColor: atkBg }}
                     >
                       {atkType}
                     </span>
@@ -130,40 +65,24 @@ function TypeMatrix() {
                   {ALL_TYPES.map((defType) => {
                     const mult = getMultiplier(atkType, defType);
 
-                    let bg = "#ffffff";
-                    let color = "#111827";
+                    let cellClass = "type-matrix-cell ";
                     let label = "";
 
                     if (mult === 2) {
-                      bg = "#bbf7d0";
-                      color = "#166534";
+                      cellClass += "type-matrix-cell-super-effective";
                       label = "2";
                     } else if (mult === 0.5) {
-                      bg = "#fecaca";
-                      color = "#7f1d1d";
+                      cellClass += "type-matrix-cell-not-effective";
                       label = "½";
                     } else if (mult === 0) {
-                      bg = "#111827";
-                      color = "#f9fafb";
+                      cellClass += "type-matrix-cell-immune";
                       label = "0";
+                    } else {
+                      cellClass += "type-matrix-cell-normal";
                     }
 
                     return (
-                      <td
-                        key={defType}
-                        style={{
-                          width: "12px",
-                          height: "12px",
-                          textAlign: "center",
-                          border: "1px solid #e5e7eb",
-                          backgroundColor: bg,
-                          color,
-                          fontWeight: label ? 600 : 400,
-                          padding: 0,
-                          lineHeight: "12px",
-                          fontSize: "0.55rem",
-                        }}
-                      >
+                      <td key={defType} className={cellClass}>
                         {label}
                       </td>
                     );

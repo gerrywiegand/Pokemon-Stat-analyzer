@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/SearchBar.css";
 
 function SearchBar({ onSearch }) {
   const [inputValue, setInputValue] = useState("");
@@ -15,34 +16,15 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ marginTop: "20px", marginBottom: "10px" }}
-    >
+    <form onSubmit={handleSubmit} className="search-form">
       <input
         type="text"
         placeholder="Search Pokémon"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        style={{
-          padding: "10px",
-          width: "70%",
-          fontSize: "1.1rem",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          marginRight: "8px",
-        }}
+        className="search-input"
       />
-      <button
-        type="submit"
-        style={{
-          padding: "10px 16px",
-          fontSize: "1rem",
-          borderRadius: "8px",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
+      <button type="submit" className="search-button">
         Search
       </button>
     </form>

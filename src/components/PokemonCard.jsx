@@ -4,16 +4,7 @@ import typeColors from "../utils/typeColors";
 import { getWeaknessesForTypes } from "../utils/typeMatchups";
 import PokemonMoves from "./moves";
 import PokemonHeader from "./PokemonHeader";
-
-const cardStyles = {
-  backgroundColor: "#f7f9fc",
-  padding: "20px",
-  borderRadius: "12px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-  width: "100%",
-  maxWidth: "800px",
-  margin: "20px auto",
-};
+import "../styles/PokemonCard.css";
 
 function PokemonCard({ pokemon }) {
   if (!pokemon) return null;
@@ -23,7 +14,7 @@ function PokemonCard({ pokemon }) {
   const weaknesses = getWeaknessesForTypes(types);
 
   return (
-    <div style={cardStyles}>
+    <div className="pokemon-card">
       <PokemonHeader
         id={id}
         name={name}
@@ -35,15 +26,15 @@ function PokemonCard({ pokemon }) {
       />
 
       {/* Stats */}
-      <div style={{ marginTop: "20px", textAlign: "left" }}>
-        <h3 style={{ marginBottom: "10px" }}>Base Stats</h3>
+      <div className="pokemon-card-stats">
+        <h3 className="card-section-title">Base Stats</h3>
         <StatBars stats={stats} />
       </div>
       {/* Weaknesses */}
       {weaknesses && weaknesses.length > 0 && (
-        <div style={{ marginTop: "20px", textAlign: "left" }}>
-          <h3 style={{ marginBottom: "8px" }}>Weaknesses</h3>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+        <div className="pokemon-card-weaknesses">
+          <h3 className="card-section-title">Weaknesses</h3>
+          <div className="weaknesses-container">
             {weaknesses.map((w) => {
               const bg = typeColors[w.type] || "#e5e7eb";
               const tooltip = `${name} takes ${w.multiplier}x damage from ${w.type}-type moves.`;
@@ -51,30 +42,11 @@ function PokemonCard({ pokemon }) {
                 <span
                   title={tooltip}
                   key={w.type}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    padding: "4px 10px",
-                    borderRadius: "999px",
-                    backgroundColor: bg,
-                    color: "#fff",
-                    fontSize: "0.85rem",
-                    textTransform: "uppercase",
-                    textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                  }}
+                  className="weakness-badge"
+                  style={{ backgroundColor: bg }}
                 >
                   {w.type}
-                  <span
-                    style={{
-                      marginLeft: "6px",
-                      fontSize: "0.75rem",
-                      backgroundColor: "rgba(0,0,0,0.25)",
-                      padding: "1px 6px",
-                      borderRadius: "999px",
-                    }}
-                  >
-                    {w.multiplier}x
-                  </span>
+                  <span className="weakness-multiplier">{w.multiplier}x</span>
                 </span>
               );
             })}
