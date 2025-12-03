@@ -1,0 +1,23 @@
+/* App Component Styles */
+
+.app-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.app-button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.app-note {
+  margin-top: 20px;
+  color: #888;
+}
+
+.app-error {
+  color: red;
+}

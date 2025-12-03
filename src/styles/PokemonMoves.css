@@ -1,0 +1,57 @@
+/* PokemonMoves Component Styles */
+
+.moves-section {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.moves-category-header {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  color: #111827;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.moves-category-content {
+  margin-bottom: 8px;
+}
+
+.move-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.move-name {
+  text-transform: capitalize;
+  min-width: 140px;
+}
+
+.move-type-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.move-category-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.move-power {
+  margin-left: auto;
+}
