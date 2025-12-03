@@ -6,11 +6,18 @@ import TypeMatrix from "./components/TypeMatrix";
 
 function App() {
   const { pokemon, loading, error, fetchPokemon } = usePokemon();
+  function randomPokemon() {
+    const randomId = Math.floor(Math.random() * 1025) + 1; // There are 1025 Pokémon as of now
+    fetchPokemon(String(randomId));
+  }
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Pokémon Stats Analyzer</h1>
       <SearchBar onSearch={fetchPokemon} />
+      <button style={styles.button} onClick={randomPokemon}>
+        Random Pokémon
+      </button>
 
       <p style={styles.note}>
         Type a Pokémon name or Dex number and hit "Search" to see its stats!
