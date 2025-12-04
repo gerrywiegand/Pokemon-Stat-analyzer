@@ -3,6 +3,8 @@
 .search-form {
   margin-top: 20px;
   margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 24px;
 }
 
 .search-input {
@@ -20,4 +22,37 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+}
+
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 5px;
+  margin-bottom: 24px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(48, 22, 220, 0.675);
+}
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 8px;
+}
+.suggestion-item:hover {
+  background-color: #b8c3f3;
+}
+.suggestion-item.selected {
+  background-color: #b8c3f3;
+}
+
+.suggestion-item .suggestion-pokemon-image {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
 }

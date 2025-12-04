@@ -24,7 +24,10 @@ function App() {
         </button>
 
         <p className="app-subtitle">
-          Type a Pokémon name or Dex number and hit "Search" to see its stats!
+          Type a Pokémon name or Dex number and hit "Search" to see its stats!{" "}
+          <br />
+          Regional forms and Mega Evolutions can be found using "name-form"
+          (e.g. "pikachu-rock-star" or "geodude-alola").
         </p>
         {loading && <p>Loading...</p>}
         {error && <p className="app-error">{error}</p>}
