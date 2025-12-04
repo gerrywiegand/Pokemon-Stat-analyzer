@@ -3,6 +3,8 @@
 .search-form {
   margin-top: 20px;
   margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 24px;
 }
 
 .search-input {
@@ -25,7 +27,8 @@
 .suggestions-list {
   list-style-type: none;
   padding: 0;
-  margin: 5px 0 0 0;
+  margin: 5px 0 0 5px;
+  margin-bottom: 24px;
   border: 1px solid #ccc;
   border-radius: 8px;
   max-height: 150px;
