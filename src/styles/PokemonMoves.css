@@ -16,7 +16,7 @@
   margin-bottom: 8px;
   color: #111827;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .moves-category-content {
@@ -54,4 +54,12 @@
 
 .move-power {
   margin-left: auto;
+}
+
+.moves-tip {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 12px;
+  margin-bottom: 14px;
+  font-style: italic;
 }
