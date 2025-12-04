@@ -5,6 +5,8 @@ function SearchBar({ onSearch }) {
   const [inputValue, setInputValue] = useState("");
   const [allNames, setAllNames] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const suggestionsRef = React.useRef(null);
 
   useEffect(() => {
     async function fetchAllPokemonNames() {
@@ -13,7 +15,11 @@ function SearchBar({ onSearch }) {
           "https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0"
         );
         const data = await res.json();
-        const names = data.results.map((p) => p.name);
+        const names = data.results.map((p) => {
+          const id = p.url.split("/").filter(Boolean).pop();
+          return { name: p.name, id: Number(id) };
+        });
+
         setAllNames(names);
       } catch (err) {
         console.error("Failed to fetch Pokémon names:", err);
@@ -21,6 +27,20 @@ function SearchBar({ onSearch }) {
     }
     fetchAllPokemonNames();
   }, []);
+
+  useEffect(() => {
+    if (!showSuggestions) return;
+    if (selectedSuggestionIndex < 0) return;
+
+    const listEl = suggestionsRef.current;
+    if (!listEl) return;
+
+    const items = listEl.children;
+    const item = items[selectedSuggestionIndex];
+    if (!item) return;
+
+    item.scrollIntoView({ block: "nearest" });
+  }, [selectedSuggestionIndex, showSuggestions]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -30,7 +50,30 @@ function SearchBar({ onSearch }) {
       setShowSuggestions(false);
     }
   };
-
+  const handleKeyDown = (e) => {
+    const suggestions = filteredSuggestions();
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedSuggestionIndex((prevIndex) =>
+        prevIndex < suggestions.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedSuggestionIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : -1
+      );
+    } else if (e.key === "Enter") {
+      if (selectedSuggestionIndex >= 0) {
+        e.preventDefault();
+        const selectedName = suggestions[selectedSuggestionIndex];
+        setInputValue(selectedName);
+        setShowSuggestions(false);
+        onSearch(selectedName);
+        setInputValue("");
+        setSelectedSuggestionIndex(-1);
+      }
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,9 +86,9 @@ function SearchBar({ onSearch }) {
 
   function filteredSuggestions() {
     const query = inputValue.trim().toLowerCase();
-    if (query.length > 2)
-      return allNames.filter((name) => name.startsWith(query)).slice(0, 5);
-    else return [];
+    if (query.length <= 2) return [];
+
+    return allNames.filter((p) => p.name.startsWith(query)).slice(0, 10);
   }
 
   return (
@@ -56,19 +99,29 @@ function SearchBar({ onSearch }) {
         value={inputValue}
         onChange={(e) => handleChange(e)}
         className="search-input"
+        onKeyDown={handleKeyDown}
       />
       {showSuggestions && filteredSuggestions().length > 0 && (
-        <ul className="suggestions-list">
-          {filteredSuggestions().map((name) => (
+        <ul className="suggestions-list" ref={suggestionsRef}>
+          {filteredSuggestions().map(({ name, id }, index) => (
             <li
+              className={
+                index === selectedSuggestionIndex
+                  ? "suggestion-item selected"
+                  : "suggestion-item"
+              }
               key={name}
               onClick={() => {
-                setInputValue(name);
                 setShowSuggestions(false);
                 onSearch(name);
+                setInputValue("");
               }}
-              className="suggestion-item"
             >
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+                alt={name}
+                className="suggestion-pokemon-image"
+              />
               {name}
             </li>
           ))}
