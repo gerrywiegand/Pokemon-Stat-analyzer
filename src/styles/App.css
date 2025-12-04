@@ -29,3 +29,15 @@
 .app-error {
   color: red;
 }
+
+.top-nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.top-nav a {
+  text-decoration: underline;
+  font-size: 1.1rem;
+}
