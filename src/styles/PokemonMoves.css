@@ -27,13 +27,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
   margin-bottom: 6px;
   font-size: 0.9rem;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.move-name {
-  text-transform: capitalize;
-  min-width: 140px;
+.move-item:hover {
+  box-shadow: 0 0 1px var(--moveglow), 0 0 10px var(--moveglow);
 }
 
 .move-type-badge {

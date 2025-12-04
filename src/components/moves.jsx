@@ -23,7 +23,12 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
       const tooltip = move.description || "";
 
       return (
-        <div key={move.name} className="move-item" title={tooltip}>
+        <div
+          key={move.name}
+          className="move-item"
+          title={tooltip}
+          style={{ "--moveglow": typeBg }}
+        >
           <strong className="move-name">{move.name.replace("-", " ")}</strong>
           <span className="move-type-badge" style={{ backgroundColor: typeBg }}>
             {move.type}
@@ -83,41 +88,7 @@ function PokemonMoves({ physicalMoves, specialMoves, statusMoves }) {
             <span>{openCategory === "status" ? "▼" : "▶"}</span>
             Status Moves
           </h3>
-          {openCategory === "status" && (
-            <div>
-              {renderMoves(statusMoves)}
-              return (
-              <div key={move.name} className="move-item">
-                {/* Move Name */}
-                <strong className="move-name">
-                  {move.name.replace("-", " ")}
-                </strong>
-
-                {/* TYPE PILL */}
-                <span
-                  className="move-type-badge"
-                  style={{ backgroundColor: typeBg }}
-                >
-                  {move.type}
-                </span>
-
-                {/* CATEGORY PILL */}
-                <span
-                  className="move-category-badge"
-                  style={{ backgroundColor: catBg }}
-                >
-                  {move.category}
-                </span>
-
-                {/* POWER & ACCURACY */}
-                {move.power != null && (
-                  <span className="move-power">Power {move.power}</span>
-                )}
-                {move.accuracy != null && <span>Acc {move.accuracy}%</span>}
-              </div>
-              ); })}
-            </div>
-          )}
+          {openCategory === "status" && <div>{renderMoves(statusMoves)}</div>}
         </div>
       )}
     </>
