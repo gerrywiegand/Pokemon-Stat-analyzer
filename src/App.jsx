@@ -4,7 +4,6 @@ import usePokemon from "./hooks/usepokemon";
 import SearchBar from "./components/Searchbar";
 import PokemonCard from "./components/PokemonCard";
 import TypeMatrix from "./components/TypeMatrix";
-import PokemonHeader from "./components/PokemonHeader";
 import "./styles/styles.css";
 import "./styles/App.css";
 
@@ -40,15 +39,25 @@ function AboutPage() {
       <h2>About Pokémon Stats Analyzer</h2>
       <p>
         This application allows users to search for Pokémon by name or Dex
-        number and view detailed statistics, type matchups, abilities, and more.
-        It leverages data from the PokéAPI to provide accurate and up-to-date
-        information about all known Pokémon including Mega evolutions and
-        regional forms.
+        number and view detailed statistics on base stats, type matchups,
+        abilities, moves, and more. It leverages data from the PokéAPI to
+        provide accurate and up-to-date information about all known Pokémon
+        including Mega evolutions and regional forms. A type matchup chart is
+        also included to help trainers understand the strengths and weaknesses
+        of different Pokémon types in battles.
+      </p>
+      <p>
+        Begin by typing the name, or dex number, of a pokemon you would like to
+        view. There is an auto-suggest drop down to help find the mon you are
+        looking for. There are three dropdown menus to view moves organized by
+        category (physical, special and status) hovering over a move will
+        highlighted according to type (ie. fire red) and a tooltip of the moves
+        description.{" "}
       </p>
       <p>
         Created by a passionate Pokémon fan and developer, this tool aims to
         help trainers of all levels better understand their favorite Pokémon and
-        strategize for battles.
+        strategize for battles in a sleek no fluff format.
       </p>
       <Link to="/">← Back to Home</Link>
     </div>
