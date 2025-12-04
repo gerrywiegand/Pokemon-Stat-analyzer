@@ -65,7 +65,7 @@ function SearchBar({ onSearch }) {
     } else if (e.key === "Enter") {
       if (selectedSuggestionIndex >= 0) {
         e.preventDefault();
-        const selectedName = suggestions[selectedSuggestionIndex];
+        const selectedName = suggestions[selectedSuggestionIndex].name;
         setInputValue(selectedName);
         setShowSuggestions(false);
         onSearch(selectedName);
