@@ -23,7 +23,7 @@ function App() {
           Random Pokémon
         </button>
 
-        <p className="app-note">
+        <p className="app-subtitle">
           Type a Pokémon name or Dex number and hit "Search" to see its stats!
         </p>
         {loading && <p>Loading...</p>}

@@ -39,6 +39,9 @@ function usePokemon() {
               power: moveData.power,
               accuracy: moveData.accuracy,
               pp: moveData.pp,
+              description: moveData.effect_entries.find(
+                (e) => e.language.name === "en"
+              )?.short_effect,
             };
           } catch (err) {
             return null; // Skip moves that fail to fetch

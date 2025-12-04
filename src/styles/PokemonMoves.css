@@ -16,7 +16,7 @@
   margin-bottom: 8px;
   color: #111827;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .moves-category-content {
@@ -27,13 +27,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
   margin-bottom: 6px;
   font-size: 0.9rem;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.move-name {
-  text-transform: capitalize;
-  min-width: 140px;
+.move-item:hover {
+  box-shadow: 0 0 1px var(--moveglow), 0 0 10px var(--moveglow);
 }
 
 .move-type-badge {
@@ -54,4 +58,12 @@
 
 .move-power {
   margin-left: auto;
+}
+
+.moves-tip {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 12px;
+  margin-bottom: 14px;
+  font-style: italic;
 }
