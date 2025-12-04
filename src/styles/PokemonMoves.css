@@ -1,8 +1,15 @@
-/* PokemonMoves Component Styles */
-
 .moves-section {
   margin-top: 20px;
   text-align: left;
+}
+
+.moves-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .moves-category-header {

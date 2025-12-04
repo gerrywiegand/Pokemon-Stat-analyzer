@@ -1,4 +1,18 @@
-/* PokemonCard Component Styles */
+.pokemon-card {
+  margin-top: 16px;
+  padding: 24px 24px 28px;
+  border-radius: 24px;
+  background-color: #f9fbff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  text-align: left;
+}
+
+.card-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
 
 .pokemon-card-stats {
   margin-top: 20px;
