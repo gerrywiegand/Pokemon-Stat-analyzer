@@ -3,13 +3,29 @@ import typeColors from "../utils/typeColors";
 import { classifyRole } from "../utils/roleClassifier";
 import "../styles/PokemonHeader.css";
 
-function PokemonHeader({ id, name, sprite, artwork, types, stats, abilities }) {
+function PokemonHeader({
+  id,
+  name,
+  sprite,
+  artwork,
+  types,
+  stats,
+  abilities,
+  isFavorite,
+  toggleFavorite,
+}) {
   return (
     <>
       {/* Header: sprite + name + types */}
       <div className="pokemon-header-container">
         {sprite && <img src={sprite} alt={name} className="pokemon-sprite" />}
         <div>
+          <button
+            className={`favorite-button ${isFavorite ? "active" : ""}`}
+            onClick={toggleFavorite}
+          >
+            {isFavorite ? "★ Favorited" : "☆ Favorite"}
+          </button>
           <h2 className="pokemon-name">
             {name.toUpperCase()}{" "}
             {typeof id === "number" && (

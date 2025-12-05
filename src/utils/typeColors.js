@@ -1,4 +1,4 @@
-const TYPE_COLORS = {
+const typeColors = {
   normal: "#A8A77A",
   fire: "#EE8130",
   water: "#6390F0",
@@ -19,4 +19,4 @@ const TYPE_COLORS = {
   fairy: "#D685AD",
 };
 
-export default TYPE_COLORS;
+export default typeColors;
