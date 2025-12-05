@@ -5,7 +5,6 @@ import SearchBar from "./components/Searchbar";
 import PokemonCard from "./components/PokemonCard";
 import TypeMatrix from "./components/TypeMatrix";
 import FavoritesList from "./components/FavoritesList";
-import "./styles/styles.css";
 import "./styles/App.css";
 
 function HomePage({
@@ -65,13 +64,13 @@ function AboutPage() {
         of different Pokémon types in battles.
       </p>
       <p>
-        Begin by typing the name, or dex number, of a pokemon you would like to
+        Begin by typing the name, or Dex number, of a Pokemon you would like to
         view. There is an auto-suggest drop down to help find the mon you are
         looking for. There are three dropdown menus to view moves organized by
         category (physical, special and status) hovering over a move will
-        highlighted according to type (ie. fire red) and a tooltip of the moves
-        description.The analyzer will also assign a suggested role based on the
-        pokemon's highest base stats.
+        highlight according to it's type (ie. fire red) and a tooltip of the
+        moves description. The analyzer will also assign a suggested role based
+        on the Pokémon's highest base stats.
       </p>
       <p>
         Created by a passionate Pokémon fan and developer, this tool aims to

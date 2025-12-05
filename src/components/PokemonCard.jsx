@@ -2,7 +2,7 @@ import React from "react";
 import StatBars from "./StatBars";
 import typeColors from "../utils/typeColors";
 import { getWeaknessesForTypes } from "../utils/typeMatchups";
-import PokemonMoves from "./moves";
+import PokemonMoves from "./PokemonMoves";
 import PokemonHeader from "./PokemonHeader";
 import "../styles/PokemonCard.css";
 
