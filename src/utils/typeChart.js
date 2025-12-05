@@ -1,5 +1,3 @@
-// src/constants/typeChart.js
-
 const TYPECHART = {
   normal: {
     weakTo: ["fighting"],

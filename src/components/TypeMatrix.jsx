@@ -3,7 +3,7 @@ import typeChart from "../utils/typeChart";
 import typeColors from "../utils/typeColors";
 import "../styles/TypeMatrix.css";
 
-const ALL_TYPES = Object.keys(typeChart);
+const allTypes = Object.keys(typeChart);
 
 function getMultiplier(attackType, defendType) {
   const info = typeChart[defendType];
@@ -31,7 +31,7 @@ function TypeMatrix() {
             <tr>
               <th className="type-matrix-corner-cell">Atk ⟂ Def</th>
 
-              {ALL_TYPES.map((defType) => {
+              {allTypes.map((defType) => {
                 const bg = typeColors[defType] || "#e5e7eb";
                 return (
                   <th key={defType} className="type-matrix-header-cell">
@@ -48,7 +48,7 @@ function TypeMatrix() {
           </thead>
 
           <tbody>
-            {ALL_TYPES.map((atkType) => {
+            {allTypes.map((atkType) => {
               const atkBg = typeColors[atkType] || "#e5e7eb";
 
               return (
@@ -62,7 +62,7 @@ function TypeMatrix() {
                     </span>
                   </th>
 
-                  {ALL_TYPES.map((defType) => {
+                  {allTypes.map((defType) => {
                     const mult = getMultiplier(atkType, defType);
 
                     let cellClass = "type-matrix-cell ";

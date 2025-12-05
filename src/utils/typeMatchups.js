@@ -1,12 +1,12 @@
 import typeChart from "../utils/typeChart";
 
-const ALL_TYPES = Object.keys(typeChart);
+const allTypes = Object.keys(typeChart);
 
 export function getWeaknessesForTypes(defenderTypes) {
   const defenders = defenderTypes.length ? defenderTypes : ["normal"];
   const results = [];
 
-  for (const attackType of ALL_TYPES) {
+  for (const attackType of allTypes) {
     let multiplier = 1;
 
     for (const def of defenders) {

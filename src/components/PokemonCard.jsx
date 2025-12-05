@@ -6,7 +6,7 @@ import PokemonMoves from "./moves";
 import PokemonHeader from "./PokemonHeader";
 import "../styles/PokemonCard.css";
 
-function PokemonCard({ pokemon }) {
+function PokemonCard({ pokemon, isFavorite, toggleFavorite }) {
   if (!pokemon) return null;
   const { id, name, sprite, artwork, types, abilities, stats, moves } = pokemon;
   const { physicalMoves, specialMoves, statusMoves } = moves || {};
@@ -18,6 +18,8 @@ function PokemonCard({ pokemon }) {
       <PokemonHeader
         id={id}
         name={name}
+        isFavorite={isFavorite}
+        toggleFavorite={toggleFavorite}
         sprite={sprite}
         artwork={artwork}
         types={types}

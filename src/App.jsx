@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import usePokemon from "./hooks/usepokemon";
 import SearchBar from "./components/Searchbar";
 import PokemonCard from "./components/PokemonCard";
 import TypeMatrix from "./components/TypeMatrix";
+import FavoritesList from "./components/FavoritesList";
 import "./styles/styles.css";
 import "./styles/App.css";
 
-function HomePage({ onSearch, pokemon, loading, error, onRandom }) {
+function HomePage({
+  onSearch,
+  pokemon,
+  loading,
+  error,
+  onRandom,
+  isFavorite,
+  toggleFavorite,
+  favorites,
+  onSelectFavorite,
+}) {
   return (
     <>
       <h1 className="app-title">Pokémon Stats Analyzer</h1>
@@ -23,11 +34,18 @@ function HomePage({ onSearch, pokemon, loading, error, onRandom }) {
         Regional forms and Mega Evolutions can be found using "name-form" (e.g.
         "pikachu-rock-star" or "geodude-alola").
       </p>
-
-      {loading && <p>Loading...</p>}
-      {error && <p className="app-error">{error}</p>}
-      {pokemon && <PokemonCard pokemon={pokemon} />}
-
+      <div className="app-status">
+        {loading && <p>Loading...</p>}
+        {error && <p className="app-error">{error}</p>}
+      </div>
+      {pokemon && (
+        <PokemonCard
+          pokemon={pokemon}
+          isFavorite={isFavorite}
+          toggleFavorite={toggleFavorite}
+        />
+      )}
+      <FavoritesList favorites={favorites} onSelect={onSelectFavorite} />
       <TypeMatrix />
     </>
   );
@@ -52,7 +70,8 @@ function AboutPage() {
         looking for. There are three dropdown menus to view moves organized by
         category (physical, special and status) hovering over a move will
         highlighted according to type (ie. fire red) and a tooltip of the moves
-        description.{" "}
+        description.The analyzer will also assign a suggested role based on the
+        pokemon's highest base stats.
       </p>
       <p>
         Created by a passionate Pokémon fan and developer, this tool aims to
@@ -66,6 +85,46 @@ function AboutPage() {
 
 function App() {
   const { pokemon, loading, error, fetchPokemon } = usePokemon();
+
+  const [favorites, setFavorites] = useState(() => {
+    if (typeof window === "undefined") return [];
+    const saved = window.localStorage.getItem("psa-favorites");
+    if (!saved) return [];
+    try {
+      return JSON.parse(saved);
+    } catch {
+      return [];
+    }
+  });
+  const isFavorite = pokemon
+    ? favorites.some((fav) => fav.id === pokemon.id)
+    : false;
+
+  useEffect(() => {
+    window.localStorage.setItem("psa-favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  function toggleFavorite() {
+    if (!pokemon) return;
+
+    setFavorites((prev) => {
+      if (isFavorite) {
+        return prev.filter((fav) => fav.id !== pokemon.id);
+      } else {
+        const summary = {
+          id: pokemon.id,
+          name: pokemon.name,
+          sprite: pokemon.sprite,
+          types: pokemon.types,
+        };
+        return [...prev, summary];
+      }
+    });
+  }
+
+  function handleSelectFavorite(id) {
+    fetchPokemon(String(id));
+  }
 
   function randomPokemon() {
     const randomId = Math.floor(Math.random() * 1025) + 1;
@@ -90,6 +149,10 @@ function App() {
                 loading={loading}
                 error={error}
                 onRandom={randomPokemon}
+                isFavorite={isFavorite}
+                toggleFavorite={toggleFavorite}
+                favorites={favorites}
+                onSelectFavorite={handleSelectFavorite}
               />
             }
           />
