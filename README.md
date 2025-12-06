@@ -1,16 +1,87 @@
-# React + Vite
+# Pokemon Stats Analyzer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Pokemon Stats analyzer! A small Vite and React app to view Pokemon stats, type matchups, abilities and moves using the PokeApi
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal is to provide a sleek no fluff format to quickly view information on pokemon stats for competitive players.
 
-## React Compiler
+Users are able to search for Pokemon by their Dex number or name with an auto-suggest feature and view:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Base Stats with a visualization bar
+- A type matchup chart and also individual pokemon's weaknesses
+- Full move lists organized by category (physical, special, status)
+- Abilities and their descriptions
+- official artwork and sprite
+- A persistent favorites system stored in local storage
 
-## Expanding the ESLint configuration
+## Key features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Autosuggest Search Bar
+
+- Prefetches all Pokemon on load (1000 +)
+- Realtime filtering with keyboard or mouse navigation
+
+### Stat Visualization
+
+- Base stats displayed numerically and by colored bars
+- Easy visualization across all stats
+
+### Type Matchup Matrix
+
+- full 18x18 matrix
+- calculates attacker to defender multipliers
+- color coded for easy view
+
+### Moves and Abilities
+
+- Fetches full move data: Power, accuracy, PP, type, category and move description
+- Hover with glow dynamically adjusts using CSS
+- Organizes moves by types with drop down menu
+- Display descriptions via hover tooltip
+
+### Favorites System
+
+- Allows users to save or remove any pokemon
+- Persists between sessions
+- Pull any favorite pokemon by clicking their pill in the list
+
+## Tech Stack
+
+- React
+- Vite
+- PokéAPI (public REST API)
+
+## How to run
+
+1. Clone Repository
+   git clone https://github.com/gerrywiegand/Pokemon-Stat-analyzer.git
+
+2. Install dependencies
+
+npm install
+
+3. Start server
+
+npm run dev
+
+## Deployment
+
+Currently deployed using render
+
+https://pokemon-stat-analyzer.onrender.com
+
+# Future improvements
+
+Upcoming updates will include
+
+- A pokemon to pokemon comparison mode
+- Team builder with analysis
+- Animations
+- Light/dark theme toggle
+- Open to suggestions
+
+# Acknowledgments
+
+- Thank you to PokéAPI for providing a free and extensive Pokémon dataset.
+- Inspired by classic Pokemon designs and competitive resources such as Pokemon Showdown and Bulbapedia
